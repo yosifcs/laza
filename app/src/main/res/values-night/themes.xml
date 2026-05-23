@@ -1,0 +1,27 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Laza" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">@color/lightDarkBlue</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/grey</item>
+        <item name="colorSecondary">@color/darkBlue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="containerColor">@color/darkBlue</item>
+        <item name="actionBarStyle">@style/Widget.Laza.ActionBar</item>
+    </style>
+
+    <style name="Theme.Laza.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/darkBlue</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/orange</item>
+        <item name="postSplashScreenTheme">@style/Theme.Laza</item>
+    </style>
+
+    <style name="ThemeOverlay.Laza.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_900</item>
+        <item name="fullscreenTextColor">@color/light_blue_A400</item>
+    </style>
+</resources>

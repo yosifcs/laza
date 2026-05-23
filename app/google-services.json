@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "806235298938",
+    "project_id": "e-commerce-kotlin-cc22f",
+    "storage_bucket": "e-commerce-kotlin-cc22f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806235298938:android:772413052998abe9c2afc3",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_UX5h9RzMvrlTovFJfr7_SSSTncGice4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806235298938:android:ea5e791b51842b7dc2afc3",
+        "android_client_info": {
+          "package_name": "com.example.laza"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_UX5h9RzMvrlTovFJfr7_SSSTncGice4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

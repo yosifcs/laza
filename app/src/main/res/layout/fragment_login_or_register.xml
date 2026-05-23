@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.LoginOrRegisterFragment">
+
+    <Button
+        android:id="@+id/buttonTwitter"
+        style="@style/Widget.Laza.TwitterButton"
+        android:text="Twitter"
+        app:icon="@drawable/ic_twitter"
+        app:iconGravity="textStart"
+
+        app:layout_constraintBottom_toTopOf="@+id/buttonFacebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/buttonFacebook"
+        style="@style/Widget.Laza.FacebookButton"
+        android:text="Facebook"
+        app:icon="@drawable/ic_facebook"
+        app:iconGravity="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGoogle"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTwitter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/buttonTwitter"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTwitter"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/buttonGoogle"
+        style="@style/Widget.Laza.GoogleButton"
+        android:text="Google"
+        app:icon="@drawable/ic_google"
+        app:iconGravity="textStart"
+
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/buttonFacebook"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/buttonFacebook"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFacebook"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/createAccountBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/bottomSignInTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an Account?"
+            android:textAppearance="@style/Text.Subline"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/bottomSignInTxtBtn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:padding="5dp"
+            android:text="Signin"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/Text.Subline"
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/createAccountBtn"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cornerRadius = "0dp"
+        android:gravity="top|center_horizontal"
+        android:text="Create an Account"
+        android:textAppearance="@style/Text.Header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
