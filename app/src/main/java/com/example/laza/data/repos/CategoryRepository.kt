@@ -1,15 +1,13 @@
 package com.example.laza.data.repos
 
-import com.example.laza.data.api.RetrofitInstance
+import com.example.laza.data.api.ApiService
 import com.example.laza.data.models.categoriesModels.CategoriesResponse
-
 import retrofit2.HttpException
 import retrofit2.Response
 
-class CategoryRepository {
-
-    private val categoryService = RetrofitInstance.apiService
-
+class CategoryRepository(
+    private val categoryService: ApiService
+) {
     suspend fun getCategories(): Response<CategoriesResponse> {
         val response = categoryService.getCategories()
         if (response.isSuccessful) {

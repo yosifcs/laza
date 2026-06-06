@@ -6,36 +6,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.laza.data.models.categoriesModels.CategoriesResponse
 import com.example.laza.data.repos.CategoryRepository
+import com.example.laza.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class CategoryViewModel : ViewModel() {
-
-    private val repo = CategoryRepository()
-
-    private val _categories = MutableLiveData<CategoriesResponse>()
-    val categories: LiveData<CategoriesResponse> = _categories
-
-    //dol zy elstate mangement
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+class CategoryViewModel(
+    private val repo: CategoryRepository
+) : ViewModel() {
+    private val _categories = MutableLiveData<Resource<CategoriesResponse>>()
+    val categories: LiveData<Resource<CategoriesResponse>> = _categories
 
     fun fetchCategories() {
         viewModelScope.launch {
-            _isLoading.postValue(true)
+            _categories.postValue(Resource.Loading())
             try {
                 val response = repo.getCategories()
-                _categories.postValue(response.body())
+                response.body()?.let {
+                    _categories.postValue(Resource.Success(it))
+                } ?: _categories.postValue(Resource.Error("Empty response body"))
             } catch (e: HttpException) {
-                _error.postValue("HTTP Error: ${e.code()}")
+                _categories.postValue(Resource.Error("HTTP Error: ${e.code()}"))
             } catch (e: IOException) {
-                _error.postValue("Network Error: Check your connection${e.message}")
-            } finally {
-                _isLoading.postValue(false)  // always runs — success or failure
+                _categories.postValue(Resource.Error("Network Error: ${e.message}"))
             }
         }
     }

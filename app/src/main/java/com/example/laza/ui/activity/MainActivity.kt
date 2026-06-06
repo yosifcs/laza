@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -14,8 +15,10 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+    private lateinit var navController: NavController  // store it
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,15 +28,15 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         val botNavBar = findViewById<BottomNavigationView>(R.id.navigationBar)
 
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+
+        navController = navHostFragment.navController  // assign once
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.homeFragment),
             drawerLayout
         )
-
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-
-        val navController = navHostFragment.navController
 
         botNavBar.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
@@ -46,16 +49,20 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        // Control visibility
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.boardingFragment -> {
+                R.id.boardingFragment, R.id.productDetailsFragment
+                    -> {
                     toolbar.visibility = View.GONE
                     botNavBar.visibility = View.GONE
                 }
 
-                R.id.loginOrRegisterFragment, R.id.signUp, R.id.loginFragment, R.id.forgotPasswordFragment, R.id.verficationCodeFragment, R.id.newPassword
-                    -> {
+                R.id.loginOrRegisterFragment,
+                R.id.signUp,
+                R.id.loginFragment,
+                R.id.forgotPasswordFragment,
+                R.id.verficationCodeFragment,
+                R.id.newPassword -> {
                     toolbar.visibility = View.VISIBLE
                     botNavBar.visibility = View.GONE
                 }
@@ -66,13 +73,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
+    // ✅ Now just uses the stored field
     override fun onSupportNavigateUp(): Boolean {
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

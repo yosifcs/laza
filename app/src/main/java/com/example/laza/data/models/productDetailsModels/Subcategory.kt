@@ -1,0 +1,8 @@
+package com.example.laza.data.models.productDetailsModels
+
+data class Subcategory(
+    val _id: String,
+    val category: String,
+    val name: String,
+    val slug: String
+)

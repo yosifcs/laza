@@ -13,7 +13,7 @@ import com.example.laza.R
 import com.example.laza.data.models.productsModels.Product
 
 class ProductsAdapter(
-    private val onItemClick: (Product) -> Unit   // ✅ removed unused products param
+    private val onItemClick: (Product) -> Unit
 ) : RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
 
     private val productDifferCallback = object : DiffUtil.ItemCallback<Product>() {
