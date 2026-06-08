@@ -77,10 +77,31 @@
         <action
             android:id="@+id/action_homeFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.example.laza.ui.fragments.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.laza.ui.fragments.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favourite"
+        android:name="com.example.laza.ui.fragments.HomeFragment"
+        android:label="Favourites" />
+
+    <fragment
+        android:id="@+id/wallet"
+        android:name="com.example.laza.ui.fragments.HomeFragment"
+        android:label="Wallet" />
 </navigation>

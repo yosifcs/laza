@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?><!-- ✅ Empty State — shown when cart is empty -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:id="@+id/emptyStateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Your cart is empty"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.5"
+            android:text="Add items to get started" />
+
+        <Button
+            android:id="@+id/shopNowBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Shop Now" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/cartContentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            tools:context=".ui.fragments.CartFragment">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productCardCartRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/deliveryAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery Address"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/productCardCartRV" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/addressCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deliveryAddress" />
+
+            <TextView
+                android:id="@+id/payMethodTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Method"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressCard" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/payMethodCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payMethodTV" />
+
+            <TextView
+                android:id="@+id/orderInfoTv"
+                style="@style/Text.Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payMethodCard" />
+
+            <TextView
+                android:id="@+id/subTotalTV"
+                style="@style/Text.Subline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sub Total"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orderInfoTv" />
+
+            <TextView
+                android:id="@+id/shippingCostTv"
+                style="@style/Text.Subline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shipping Cost"
+                app:layout_constraintStart_toStartOf="@+id/subTotalTV"
+                app:layout_constraintTop_toBottomOf="@+id/subTotalTV" />
+
+            <TextView
+                android:id="@+id/totalTV"
+                style="@style/Text.Subline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                app:layout_constraintStart_toStartOf="@+id/subTotalTV"
+                app:layout_constraintTop_toBottomOf="@+id/shippingCostTv" />
+
+            <TextView
+                android:id="@+id/totalPricenoTV"
+                style="@style/Text.Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="@+id/subTotalNoTV"
+                app:layout_constraintTop_toBottomOf="@+id/shippingCostNoTV" />
+
+            <TextView
+                android:id="@+id/shippingCostNoTV"
+                style="@style/Text.Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 EGP"
+                app:layout_constraintEnd_toEndOf="@+id/subTotalNoTV"
+                app:layout_constraintTop_toBottomOf="@+id/subTotalNoTV" />
+
+            <TextView
+                android:id="@+id/subTotalNoTV"
+                style="@style/Text.Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/subTotalTV" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,9 @@ class MainActivity : AppCompatActivity() {
         botNavBar.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Home -> navController.navigate(R.id.homeFragment)
-                R.id.favourite -> navController.navigate(R.id.loginFragment)
+                R.id.favourite -> navController.navigate(R.id.favourite)
+                R.id.cartFragment -> navController.navigate(R.id.cartFragment)
+                R.id.wallet -> navController.navigate(R.id.wallet)
             }
             true
         }

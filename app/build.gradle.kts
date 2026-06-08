@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -51,8 +52,10 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.converter.gson)
     implementation(libs.glide)
-    implementation("io.insert-koin:koin-android:4.2.1")
-    implementation("io.insert-koin:koin-androidx-compose:4.2.1")
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.androidx.room.runtime)
+    ksp("androidx.room:room-compiler:2.8.4")
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)

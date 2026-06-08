@@ -8,12 +8,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.laza.R
 import com.example.laza.adapters.ProductDetailsAdapter
+import com.example.laza.data.database.CartItem
+import com.example.laza.data.models.productDetailsModels.Data
 import com.example.laza.data.models.productDetailsModels.Review
 import com.example.laza.databinding.FragmentProductDetailsBinding
+import com.example.laza.ui.viewmodels.CartViewModel
 import com.example.laza.ui.viewmodels.ProductDetailsViewModel
 import com.example.laza.utils.Resource
-import com.google.android.material.chip.Chip
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -25,6 +28,10 @@ class ProductDetailsFragment : Fragment() {
     private val productDetailsViewModel: ProductDetailsViewModel by viewModel()
     private lateinit var productDetailsAdapter: ProductDetailsAdapter
 
+    private val cartViewModel: CartViewModel by viewModel()
+    private var currentProduct: Data? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,14 +42,44 @@ class ProductDetailsFragment : Fragment() {
     }
 
     fun setupClickListeners() {
-        binding.sizeChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            val selectedChip = group.findViewById<Chip>(
-                checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+        binding.addCartBTN.setOnClickListener {
+            val product = currentProduct ?: return@setOnClickListener
+
+            val sizeCategories = listOf("Men's Fashion", "Women's Fashion")
+            val requiresSize = product.category.name in sizeCategories
+
+            val selectedSize = if (requiresSize) {
+                // only check size for fashion products
+                when (binding.sizeChipGroup.checkedChipId) {
+                    R.id.sChipAndroid -> "S"
+                    R.id.mChipAndroid -> "M"
+                    R.id.lChipAndroid -> "L"
+                    R.id.xLChipAndroid -> "XL"
+                    R.id.xxLChipAndroid -> "XXL"
+                    else -> {
+                        Toast.makeText(requireContext(), "Please select a size", Toast.LENGTH_SHORT)
+                            .show()
+                        return@setOnClickListener
+                    }
+                }
+            } else {
+                // electronics, books etc — no size needed
+                "N/A"
+            }
+
+            val cartItem = CartItem(
+                productId = product.id,
+                title = product.title,
+                imageCover = product.imageCover,
+                price = product.price,
+                selectedSize = selectedSize,
+                quantity = 1
             )
-            val selectedSize = selectedChip.text.toString()
-            // use selectedSize
+
+            cartViewModel.addToCart(cartItem)
+            Toast.makeText(requireContext(), "${product.title} added to cart ✅", Toast.LENGTH_SHORT)
+                .show()
         }
-        binding.addCartBTN.setOnClickListener { }
     }
 
     private fun setupRecyclerView() {
@@ -95,7 +132,7 @@ class ProductDetailsFragment : Fragment() {
                 }
 
                 is Resource.Success -> {
-
+                    currentProduct = resource.data.data
                     val product = resource.data.data
                     setupReview(product.reviews)
                     // categories that have sizes

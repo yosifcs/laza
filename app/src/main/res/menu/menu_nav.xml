@@ -8,7 +8,7 @@
         android:id="@+id/favourite"/>
     <item android:title="Cart"
         android:icon="@drawable/cart"
-        android:id="@+id/cart"/>
+        android:id="@+id/cartFragment"/>
     <item android:title="Payment"
         android:icon="@drawable/wallet"
         android:id="@+id/wallet"/>

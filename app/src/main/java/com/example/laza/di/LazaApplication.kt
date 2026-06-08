@@ -1,6 +1,7 @@
 package com.example.laza
 
 import android.app.Application
+import com.example.laza.di.dataBaseModule
 import com.example.laza.di.networkModule
 import com.example.laza.di.repositoryModule
 import com.example.laza.di.viewModelModule
@@ -17,7 +18,8 @@ class LazaApplication : Application() {
             modules(
                 networkModule,
                 repositoryModule,
-                viewModelModule
+                viewModelModule,
+                dataBaseModule
             )                     // register your module
         }
     }
