@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.laza.R
 
-class BoardingFragment : Fragment(R.layout.fragment_boarding) {
+class BoardingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

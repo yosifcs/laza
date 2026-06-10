@@ -34,22 +34,19 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController  // assign once
 
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment),
+            setOf(
+                R.id.homeFragment,
+                R.id.cartFragment,
+                R.id.wishlistFragment,
+                R.id.paymentFragment
+            ),
+
             drawerLayout
         )
 
         botNavBar.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
-        botNavBar.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.Home -> navController.navigate(R.id.homeFragment)
-                R.id.favourite -> navController.navigate(R.id.favourite)
-                R.id.cartFragment -> navController.navigate(R.id.cartFragment)
-                R.id.wallet -> navController.navigate(R.id.wallet)
-            }
-            true
-        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.laza.R
-import com.example.laza.data.database.CartItem
+import com.example.laza.data.database.cartDB.CartItem
 
 class CartAdapter(
     private val onIncrease: (CartItem) -> Unit,

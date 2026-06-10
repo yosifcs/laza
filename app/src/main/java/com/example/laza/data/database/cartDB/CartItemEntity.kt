@@ -1,4 +1,4 @@
-package com.example.laza.data.database
+package com.example.laza.data.database.cartDB
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

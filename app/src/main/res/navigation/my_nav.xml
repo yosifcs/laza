@@ -94,14 +94,23 @@
         <action
             android:id="@+id/action_cartFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/favourite"
-        android:name="com.example.laza.ui.fragments.HomeFragment"
-        android:label="Favourites" />
 
     <fragment
-        android:id="@+id/wallet"
-        android:name="com.example.laza.ui.fragments.HomeFragment"
-        android:label="Wallet" />
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.laza.ui.fragments.WishlistFragment"
+        android:label="Wishlist"
+        tools:layout="@layout/fragment_wishlist">
+        <action
+            android:id="@+id/action_wishlistFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.laza.ui.fragments.PaymentFragment"
+        android:label="Payment"
+        tools:layout="@layout/fragment_payment" />
 </navigation>

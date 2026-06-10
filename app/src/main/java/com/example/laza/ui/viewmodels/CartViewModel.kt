@@ -3,7 +3,7 @@ package com.example.laza.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.laza.data.database.CartItem
+import com.example.laza.data.database.cartDB.CartItem
 import com.example.laza.data.repos.CartRepository
 import kotlinx.coroutines.launch
 

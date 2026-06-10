@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="5dp"
-    android:layout_marginTop="12dp">
+    android:layout_marginTop="12dp"
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,11 +18,30 @@
             android:layout_height="300dp"
             app:cardCornerRadius="16dp">
 
-            <ImageView
-                android:id="@+id/productImage"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/productImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <ImageButton
+                    android:id="@+id/favBTN"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="8dp"
+                    android:background="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="6dp"
+                    android:src="@drawable/heart" />
+
+
+            </FrameLayout>
+
         </androidx.cardview.widget.CardView>
 
 

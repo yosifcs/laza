@@ -5,11 +5,15 @@ import com.example.laza.data.api.ApiService
 import com.example.laza.data.database.AppDatabase
 import com.example.laza.data.repos.CartRepository
 import com.example.laza.data.repos.CategoryRepository
+import com.example.laza.data.repos.PaymentRepository
 import com.example.laza.data.repos.ProductsRepository
+import com.example.laza.data.repos.WishlistRepository
 import com.example.laza.ui.viewmodels.CartViewModel
 import com.example.laza.ui.viewmodels.CategoryViewModel
+import com.example.laza.ui.viewmodels.PaymentViewModel
 import com.example.laza.ui.viewmodels.ProductDetailsViewModel
 import com.example.laza.ui.viewmodels.ProductsViewModel
+import com.example.laza.ui.viewmodels.WishlistViewModel
 import com.example.laza.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,7 +49,9 @@ val networkModule = module {
 val repositoryModule = module {
     single { ProductsRepository(get()) }
     single { CategoryRepository(get()) }
-    single { CartRepository(get()) }  // ✅ add this
+    single { CartRepository(get()) }
+    single { WishlistRepository(get()) }
+    single { PaymentRepository(get()) }
 }
 
 // di/ViewModelModule.kt
@@ -53,9 +59,12 @@ val viewModelModule = module {
     viewModel { ProductsViewModel(get()) }
     viewModel { CategoryViewModel(get()) }
     viewModel { ProductDetailsViewModel(get()) }
-    viewModel { CartViewModel(get()) }  // ✅ add this
+    viewModel { CartViewModel(get()) }
+    viewModel { WishlistViewModel(get()) }
+    viewModel { PaymentViewModel(get()) }
 }
 
+// di/dataBaseModule.kt
 val dataBaseModule = module {
     // ✅ Room database
     single {
@@ -63,9 +72,12 @@ val dataBaseModule = module {
             androidContext(),
             AppDatabase::class.java,
             "laza_db"
-        ).build()
+        ).fallbackToDestructiveMigration() // <--- ADD THIS LINE
+            .build()
     }
     // ✅ CartDao
     single { get<AppDatabase>().cartDao() }
+    single { get<AppDatabase>().wishlistDao() }
+    single { get<AppDatabase>().paymentDao() }
 
 }

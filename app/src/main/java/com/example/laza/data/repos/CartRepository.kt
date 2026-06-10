@@ -1,8 +1,8 @@
 package com.example.laza.data.repos
 
 import androidx.lifecycle.LiveData
-import com.example.laza.data.database.CartDao
-import com.example.laza.data.database.CartItem
+import com.example.laza.data.database.cartDB.CartDao
+import com.example.laza.data.database.cartDB.CartItem
 
 class CartRepository(private val cartDao: CartDao) {
 

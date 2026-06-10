@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.laza.R
 import com.example.laza.adapters.ProductDetailsAdapter
-import com.example.laza.data.database.CartItem
+import com.example.laza.data.database.cartDB.CartItem
 import com.example.laza.data.models.productDetailsModels.Data
 import com.example.laza.data.models.productDetailsModels.Review
 import com.example.laza.databinding.FragmentProductDetailsBinding

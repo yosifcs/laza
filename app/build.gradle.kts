@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.legacy.support.v4)
     ksp("androidx.room:room-compiler:2.8.4")
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.activity)

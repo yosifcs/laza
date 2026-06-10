@@ -5,11 +5,11 @@
         android:id="@+id/homeFragment"/>
     <item android:title="WishList"
         android:icon="@drawable/fav"
-        android:id="@+id/favourite"/>
+        android:id="@+id/wishlistFragment"/>
     <item android:title="Cart"
         android:icon="@drawable/cart"
         android:id="@+id/cartFragment"/>
     <item android:title="Payment"
         android:icon="@drawable/wallet"
-        android:id="@+id/wallet"/>
+        android:id="@+id/paymentFragment"/>
 </menu>

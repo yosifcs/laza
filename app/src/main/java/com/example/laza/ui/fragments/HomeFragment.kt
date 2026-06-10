@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.laza.R
+import com.example.laza.data.database.wishlistDB.WishlistItem
 import com.example.laza.databinding.FragmentHomeBinding
 import com.example.laza.ui.adapters.ProductsAdapter
 import com.example.laza.ui.viewmodels.CategoryViewModel
 import com.example.laza.ui.viewmodels.ProductsViewModel
+import com.example.laza.ui.viewmodels.WishlistViewModel
 import com.example.laza.utils.Resource
 import com.google.android.material.chip.Chip
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,6 +28,7 @@ class HomeFragment : Fragment() {
 
     private val categoriesViewModel: CategoryViewModel by viewModel()
     private val productsViewModel: ProductsViewModel by viewModel()
+    private val wishlistViewModel: WishlistViewModel by viewModel()
 
     private lateinit var productsAdapter: ProductsAdapter
 
@@ -61,15 +64,26 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
 
-        productsAdapter = ProductsAdapter { product ->
-            val bundle = Bundle().apply {
-                putString("productId", product.id)
+        productsAdapter = ProductsAdapter(
+            onItemClick = { product ->
+                val bundle = Bundle().apply { putString("productId", product.id) }
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_productDetailsFragment,
+                    bundle
+                )
+            },
+            onFavClick = { product ->  // ✅ add
+                val wishlistItem = WishlistItem(
+                    productId = product.id,
+                    title = product.title,
+                    imageCover = product.imageCover,
+                    price = product.price,
+
+                    )
+                wishlistViewModel.addToWishlist(wishlistItem)  // toggles add /remove
             }
-            findNavController().navigate(
-                R.id.action_homeFragment_to_productDetailsFragment,
-                bundle
-            )
-        }
+
+        )
 
         binding.productsRecyclerView.apply {
             adapter = productsAdapter
@@ -135,7 +149,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
+        wishlistViewModel.wishlistItems.observe(viewLifecycleOwner) { wishlistItems ->
+            val wishlistedIds = wishlistItems.map { it.productId }.toSet()
+            productsAdapter.updateWishlistedIds(wishlistedIds)
+        }
     }
 
     // CRITICAL — prevents memory leaks in Fragments

@@ -1,4 +1,4 @@
-package com.example.laza.data.database
+package com.example.laza.data.database.cartDB
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -16,7 +16,7 @@ interface CartDao {
     fun getCartItems(): LiveData<List<CartItem>>
 
     // add item — if same productId+size exists, replace it
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun addToCart(cartItem: CartItem)
 
     // remove one item

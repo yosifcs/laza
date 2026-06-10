@@ -1,8 +1,11 @@
 package com.example.laza.ui.adapters
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -13,8 +16,14 @@ import com.example.laza.R
 import com.example.laza.data.models.productsModels.Product
 
 class ProductsAdapter(
-    private val onItemClick: (Product) -> Unit
+    private val onItemClick: (Product) -> Unit,
+    private val onFavClick: (Product) -> Unit
 ) : RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
+    private var wishlistedIds: Set<String> = emptySet()
+    fun updateWishlistedIds(ids: Set<String>) {
+        wishlistedIds = ids
+        notifyDataSetChanged()  // refresh all items
+    }
 
     private val productDifferCallback = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
@@ -36,6 +45,7 @@ class ProductsAdapter(
         val image: ImageView = itemView.findViewById(R.id.productImage)
         val title: TextView = itemView.findViewById(R.id.productName)
         val price: TextView = itemView.findViewById(R.id.productPrice)
+        val fav: ImageButton = itemView.findViewById(R.id.favBTN)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -53,6 +63,14 @@ class ProductsAdapter(
             .placeholder(R.drawable.boarding_man)
             .into(holder.image)
         holder.itemView.setOnClickListener { onItemClick(product) }
+        if (product.id in wishlistedIds) {
+            holder.fav.setImageResource(R.drawable.fav)
+            holder.fav.imageTintList = ColorStateList.valueOf(Color.RED)  // red
+        } else {
+            holder.fav.setImageResource(R.drawable.fav)
+            holder.fav.imageTintList = ColorStateList.valueOf(Color.GRAY)  // gray outline
+        }
+        holder.fav.setOnClickListener { onFavClick(product) }
     }
 
     override fun getItemCount(): Int = differ.currentList.size

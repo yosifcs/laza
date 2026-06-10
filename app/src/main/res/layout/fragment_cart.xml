@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!-- ✅ Empty State — shown when cart is empty -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -49,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
@@ -67,72 +68,125 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/deliveryAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delivery Address"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productCardCartRV" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/addressCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/deliveryAddress" />
-
-            <TextView
                 android:id="@+id/payMethodTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Payment Method"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addressCard" />
+                app:layout_constraintTop_toBottomOf="@+id/productCardCartRV" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/payMethodCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/payMethodTV" />
+                app:layout_constraintTop_toBottomOf="@id/payMethodTV">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Shown when a card is selected -->
+                    <LinearLayout
+                        android:id="@+id/selectedCardLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/selectedCardNumberTV"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="monospace"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/selectedCardOwnerTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:alpha="0.6"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- Shown when no card exists -->
+                    <LinearLayout
+                        android:id="@+id/noCardLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:alpha="0.6"
+                            android:text="No payment card added"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/goToWalletTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Add Card →"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/orderInfoTv"
                 style="@style/Text.Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Order Info"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/payMethodCard" />
 
             <TextView
                 android:id="@+id/subTotalTV"
-                style="@style/Text.Subline"
+                style="@style/Text.Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Sub Total"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/orderInfoTv" />
 
             <TextView
                 android:id="@+id/shippingCostTv"
-                style="@style/Text.Subline"
+                style="@style/Text.Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Shipping Cost"
-                app:layout_constraintStart_toStartOf="@+id/subTotalTV"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subTotalTV" />
 
             <TextView
                 android:id="@+id/totalTV"
-                style="@style/Text.Subline"
+                style="@style/Text.Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Total"
+
                 app:layout_constraintStart_toStartOf="@+id/subTotalTV"
                 app:layout_constraintTop_toBottomOf="@+id/shippingCostTv" />
 
@@ -142,17 +196,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                app:layout_constraintEnd_toEndOf="@+id/subTotalNoTV"
-                app:layout_constraintTop_toBottomOf="@+id/shippingCostNoTV" />
+                app:layout_constraintBottom_toBottomOf="@+id/totalTV"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/shippingCostNoTV"
                 style="@style/Text.Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="10 EGP"
-                app:layout_constraintEnd_toEndOf="@+id/subTotalNoTV"
-                app:layout_constraintTop_toBottomOf="@+id/subTotalNoTV" />
+                app:layout_constraintBottom_toBottomOf="@+id/shippingCostTv"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/subTotalNoTV"
@@ -160,8 +215,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/subTotalTV"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/checkoutBTN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Check Out"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/subTotalTV" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalTV" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
